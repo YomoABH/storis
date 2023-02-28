@@ -201,6 +201,10 @@ h6 {
           justify-content: center;
 }
 
+.slide picture {
+  height: 80%;
+}
+
 .slide img {
   height: 80%;
 }
