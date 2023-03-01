@@ -3016,7 +3016,10 @@
                     const progress = document.querySelectorAll(".progress-el");
                     progress.forEach(((el, i) => {
                         el.classList.remove("animation");
-                        if (i === swiper.activeIndex) el.classList.add("animation");
+                        if (i === swiper.activeIndex) {
+                            el.previousElementSibling.classList.add("full-bg");
+                            el.classList.add("animation");
+                        }
                     }));
                 }
             }
