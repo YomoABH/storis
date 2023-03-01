@@ -2989,17 +2989,34 @@
             speed: 1,
             allowTouchMove: false,
             autoplay: {
-                delay: 2500,
+                delay: 8e3,
                 disableOnInteraction: false
             },
-            loop: true,
+            navigation: {
+                prevEl: ".swiper-button-prev",
+                nextEl: ".swiper-button-next"
+            },
             on: {
-                init() {
+                init(swiper) {
                     this.el.addEventListener("touchstart", (() => {
                         this.autoplay.stop();
                     }));
                     this.el.addEventListener("touchend", (() => {
                         this.autoplay.start();
+                    }));
+                    console.log("CurrentActive:", swiper.activeIndex);
+                    const progress = document.querySelectorAll(".progress-el");
+                    progress.forEach(((el, i) => {
+                        el.classList.remove("animation");
+                        if (i === swiper.activeIndex) el.classList.add("animation");
+                    }));
+                },
+                slideChange: function(swiper) {
+                    console.log("CurrentActive:", swiper.activeIndex);
+                    const progress = document.querySelectorAll(".progress-el");
+                    progress.forEach(((el, i) => {
+                        el.classList.remove("animation");
+                        if (i === swiper.activeIndex) el.classList.add("animation");
                     }));
                 }
             }
