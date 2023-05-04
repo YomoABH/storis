@@ -3012,13 +3012,19 @@
                     }));
                 },
                 slideChange: function(swiper) {
-                    console.log("CurrentActive:", swiper.activeIndex);
                     const progress = document.querySelectorAll(".progress-el");
                     progress.forEach(((el, i) => {
                         el.classList.remove("animation");
                         if (i === swiper.activeIndex) {
-                            el.previousElementSibling.classList.add("full-bg");
-                            el.classList.add("animation");
+                            if (!el.classList.contains("full-bg")) el.classList.add("animation");
+                            if (0 !== i) el.previousElementSibling.classList.add("full-bg");
+                            if (el.classList.contains("full-bg")) {
+                                el.classList.remove("full-bg");
+                                setTimeout((() => {
+                                    el.classList.add("animation");
+                                }), 10);
+                            }
+                            if (el.nextElementSibling) el.nextElementSibling.classList.remove("full-bg");
                         }
                     }));
                 }
